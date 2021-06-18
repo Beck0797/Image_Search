@@ -25,6 +25,6 @@ class GalleryViewModel @ViewModelInject constructor(
     }
 
     companion object{
-        private const val DEFAULT_QUERY = "cats" // that that is shown when app first opened
+        private const val DEFAULT_QUERY = "cars" // that that is shown when app first opened
     }
 }
