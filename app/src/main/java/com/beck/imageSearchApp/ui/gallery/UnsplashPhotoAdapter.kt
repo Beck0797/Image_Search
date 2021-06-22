@@ -12,7 +12,9 @@ import com.beck.imageSearchApp.databinding.ItemUnsplashPhotoBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
+//paging library class, gets two arguments <type of data we want to use, viewHolder >
 class UnsplashPhotoAdapter : PagingDataAdapter<UnsplashPhoto, UnsplashPhotoAdapter.PhotoViewHolder>(
+
     PHOTO_COMPARATOR
 ) {
 
