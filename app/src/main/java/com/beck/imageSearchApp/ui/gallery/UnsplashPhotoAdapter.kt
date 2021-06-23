@@ -13,7 +13,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 //paging library class, gets two arguments <type of data we want to use, viewHolder >
-class UnsplashPhotoAdapter : PagingDataAdapter<UnsplashPhoto, UnsplashPhotoAdapter.PhotoViewHolder>(
+class UnsplashPhotoAdapter(private val listener : OnItemClickListener) :
+    PagingDataAdapter<UnsplashPhoto, UnsplashPhotoAdapter.PhotoViewHolder>(
 
     PHOTO_COMPARATOR
 ) {
@@ -37,8 +38,22 @@ class UnsplashPhotoAdapter : PagingDataAdapter<UnsplashPhoto, UnsplashPhotoAdapt
     }
 
 
-    class PhotoViewHolder(private val binding: ItemUnsplashPhotoBinding) :
+    inner class PhotoViewHolder(private val binding: ItemUnsplashPhotoBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init{
+            binding.root.setOnClickListener {
+                val postion = bindingAdapterPosition
+                if (postion != RecyclerView.NO_POSITION){
+                    val item = getItem(postion)
+                    if(item != null){
+                        listener.onItemClick(item)
+
+                    }
+                }
+            }
+        }
+
         fun bind(photo: UnsplashPhoto) {
             binding.apply {
                 Glide.with(itemView)
@@ -51,6 +66,11 @@ class UnsplashPhotoAdapter : PagingDataAdapter<UnsplashPhoto, UnsplashPhotoAdapt
                 textViewUserName.text = photo.user.username
             }
         }
+
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(photo: UnsplashPhoto)
 
     }
 
